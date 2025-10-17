@@ -10,22 +10,26 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Kantumruy Pro', sans-serif;
-    background-color: #0d1117; /* UPDATED: ពណ៌ផ្ទៃខាងក្រោយដិតជាងមុន */
+    background-color: #0d1117;
     color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    
+    /* ការកែប្រែគន្លឹះ៖ 
+      - ដក "overflow: hidden;" ចេញ ដើម្បីអនុញ្ញាតឲ្យអូសចុះក្រោមបាន
+      - បន្ថែម "overflow-x: hidden;" ដើម្បីការពារការអូសទៅឆ្វេង-ស្តាំដែលមិនចាំបាច់
+    */
+    overflow-x: hidden; 
 }
 
 /* រចនាបថ Background បែប Digital */
 #particles-js {
-    position: absolute;
+    position: fixed; /* ប្រើ fixed ដើម្បីឲ្យវាជាប់នៅមួយកន្លែងពេល scroll */
     width: 100%;
     height: 100%;
     z-index: -1;
-    /* UPDATED: Gradient ថ្មីដែលច្បាស់ជាងមុន */
     background-image: linear-gradient(to bottom right, #020024, #040979, #00d4ff);
 }
 
@@ -35,13 +39,14 @@ body {
     padding: 40px;
     text-align: center;
     z-index: 1;
-    /* UPDATED: ប្រអប់មានពណ៌ដិតដើម្បីឲ្យអក្សរលេចធ្លោ */
     background: rgba(10, 15, 30, 0.6);
     border-radius: 20px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 170, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    /* បន្ថែម margin ដើម្បីឲ្យមានช่องว่างនៅខាងលើ និងក្រោមពេលមើលលើទូរស័ព្ទ */
+    margin: 50px 0;
 }
 
 /* រចនាបថ Header */
@@ -52,13 +57,12 @@ body {
     align-items: center;
 }
 
-/* UPDATED: រចនាបថ Logo ថ្មី */
 .logo {
     width: 150px;
     height: 150px;
     margin-bottom: 20px;
-    border-radius: 50%; /* ធ្វើឲ្យរាងមូល */
-    object-fit: cover; /* ធានាថារូបភាពពេញស្អាត */
+    border-radius: 50%;
+    object-fit: cover;
     border: 3px solid var(--primary-color);
     box-shadow: 0 0 25px var(--glow-color), 0 0 10px rgba(0, 255, 204, 0.5);
     animation: fadeInDown 1s ease-out;
@@ -152,18 +156,37 @@ body {
     }
 }
 
-/* Responsive Design */
+/* Responsive Design សម្រាប់ទូរស័ព្ទ 
+  (កែប្រែបន្ថែមនៅទីនេះ)
+*/
 @media (max-width: 768px) {
+    body {
+      /* ធ្វើឲ្យប្រអប់ចាប់ផ្តើមពីខាងលើ មិនមែននៅកណ្តាលពេលត្រូវអូស */
+      align-items: flex-start; 
+    }
+    
     .container {
-        padding: 20px;
+        padding: 25px;
+        margin: 20px 0; /* បន្ថយช่องว่าง */
     }
+    
+    .logo {
+      /* បង្រួម Logo ឲ្យតូចជាងមុនលើទូរស័ព្ទ */
+      width: 120px;
+      height: 120px;
+    }
+
     .title {
-        font-size: 2rem;
+        font-size: 2.2rem; /* បង្រួមទំហំអក្សរ */
     }
+
     .subtitle {
         font-size: 1rem;
     }
+
     .button-grid {
+        /* បង្ហាញប៊ូតុងតែមួយជួរដេក */
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
